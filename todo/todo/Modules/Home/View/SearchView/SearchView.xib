@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="PlayfairDisplay-Regular.ttf">
+            <string>PlayfairDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchView" customModule="todo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pk4-XC-H2r">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown" translatesAutoresizingMaskIntoConstraints="NO" id="9cD-nw-e5v">
+                            <rect key="frame" x="8" y="440" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="dQn-VP-Dvc"/>
+                                <constraint firstAttribute="height" constant="16" id="qp4-0d-pnP"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHy-Sp-yq3">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="896"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="0mt-Hz-v9z"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain"/>
+                            <connections>
+                                <action selector="dropDownClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="dX1-1p-N4F"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mdY-rM-pNx">
+                            <rect key="frame" x="40" y="0.0" width="374" height="896"/>
+                            <fontDescription key="fontDescription" name="PlayfairDisplay-Regular" family="Playfair Display" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemRedColor"/>
+                    <constraints>
+                        <constraint firstItem="mdY-rM-pNx" firstAttribute="top" secondItem="pk4-XC-H2r" secondAttribute="top" id="6Ob-LV-q7K"/>
+                        <constraint firstAttribute="bottom" secondItem="oHy-Sp-yq3" secondAttribute="bottom" id="K3U-Ec-ihk"/>
+                        <constraint firstItem="oHy-Sp-yq3" firstAttribute="leading" secondItem="pk4-XC-H2r" secondAttribute="leading" id="KbT-T1-yEf"/>
+                        <constraint firstAttribute="bottom" secondItem="mdY-rM-pNx" secondAttribute="bottom" id="L9y-Vw-ntX"/>
+                        <constraint firstItem="9cD-nw-e5v" firstAttribute="leading" secondItem="pk4-XC-H2r" secondAttribute="leading" constant="8" id="bEQ-jX-Leq"/>
+                        <constraint firstAttribute="trailing" secondItem="mdY-rM-pNx" secondAttribute="trailing" id="brw-jx-9tV"/>
+                        <constraint firstItem="9cD-nw-e5v" firstAttribute="centerY" secondItem="oHy-Sp-yq3" secondAttribute="centerY" id="hST-Yt-20J"/>
+                        <constraint firstItem="oHy-Sp-yq3" firstAttribute="top" secondItem="pk4-XC-H2r" secondAttribute="top" id="n86-c5-AVY"/>
+                        <constraint firstItem="mdY-rM-pNx" firstAttribute="leading" secondItem="oHy-Sp-yq3" secondAttribute="trailing" id="tw9-gq-aLh"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="pk4-XC-H2r" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2rE-JU-KpC"/>
+                <constraint firstAttribute="bottom" secondItem="pk4-XC-H2r" secondAttribute="bottom" id="i35-PF-BII"/>
+                <constraint firstItem="pk4-XC-H2r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iZ1-Cy-UBa"/>
+                <constraint firstAttribute="trailing" secondItem="pk4-XC-H2r" secondAttribute="trailing" id="zTo-2y-cmJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentView" destination="pk4-XC-H2r" id="0NK-75-dgu"/>
+                <outlet property="dropDownButon" destination="oHy-Sp-yq3" id="1aB-xd-82O"/>
+                <outlet property="searchTextField" destination="mdY-rM-pNx" id="ox4-Uh-xB5"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="71"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dropdown" width="24" height="24"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

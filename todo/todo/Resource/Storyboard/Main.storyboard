@@ -24,23 +24,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hr5-nk-RN5">
-                                <rect key="frame" x="173.5" y="432.5" width="67" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sdz-zP-Iqy">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
-                                    <action selector="selectDate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ifv-Mk-4nX"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="OfO-ec-G1e"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="n73-RY-9Dg"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROK-JE-566">
+                                <rect key="frame" x="358" y="806" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3eo-Kj-DKM"/>
+                                    <constraint firstAttribute="width" constant="40" id="rDW-of-56j"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="add"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="selectDate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8L6-xt-q3B"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Hr5-nk-RN5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="beF-P4-PVv"/>
-                            <constraint firstItem="Hr5-nk-RN5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jE6-Zk-wFA"/>
+                            <constraint firstAttribute="bottom" secondItem="sdz-zP-Iqy" secondAttribute="bottom" id="6nH-o9-we1"/>
+                            <constraint firstItem="sdz-zP-Iqy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Zqc-Su-z8J"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ROK-JE-566" secondAttribute="bottom" constant="16" id="e6K-et-GVA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ROK-JE-566" secondAttribute="trailing" constant="16" id="hXZ-jK-44u"/>
+                            <constraint firstAttribute="trailing" secondItem="sdz-zP-Iqy" secondAttribute="trailing" id="tb1-Vz-FsX"/>
+                            <constraint firstItem="sdz-zP-Iqy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="u4F-Ue-dUo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LB9-EC-tQp"/>
+                    <connections>
+                        <outlet property="tableView" destination="sdz-zP-Iqy" id="xnT-gU-p72"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -68,7 +89,7 @@
                                                     <outlet property="delegate" destination="Gyf-AH-p1w" id="MBV-7C-eXm"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WfS-Kt-FCj">
+                                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WfS-Kt-FCj">
                                                 <rect key="frame" x="16" y="56.5" width="382" height="24.5"/>
                                                 <fontDescription key="fontDescription" name="PlayfairDisplay-Regular" family="Playfair Display" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -188,10 +209,14 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="As4-fi-Bb7"/>
                                 </constraints>
+                                <color key="tintColor" red="0.21960784310000001" green="0.46274509800000002" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Thêm">
                                     <fontDescription key="titleFontDescription" name="PlayfairDisplay-Regular" family="Playfair Display" pointSize="17"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="addNewTaskClicked:" destination="Gyf-AH-p1w" eventType="touchUpInside" id="Us2-fU-9OW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="P6G-Ho-5ee"/>
@@ -208,6 +233,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="foI-Va-Rey" id="Gdo-at-9Md"/>
                         <outlet property="categoryTaskTextField" destination="WfS-Kt-FCj" id="89e-9D-cO0"/>
                         <outlet property="deadlineTextField" destination="OeS-5g-Od4" id="Snc-to-jib"/>
                         <outlet property="descriptionTextView" destination="Xc4-GU-n7x" id="qaB-aX-Qzy"/>
@@ -241,6 +267,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add" width="25" height="25"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DropDown
 
 class AddTaskViewController: BaseViewController {
     @IBOutlet weak var titleTaskTextField: UITextField!
@@ -17,15 +18,26 @@ class AddTaskViewController: BaseViewController {
     @IBOutlet weak var startDateButton: UIButton!
     
     @IBOutlet weak var endDateButton: UIButton!
-    
+    @IBOutlet weak var addButton: UIButton!
     
     
     var placeholderLabel: UILabel!
+    private var viewModel = AddTaskViewModel()
+    var addTaskResult: (() -> ())?
+    private var dropDown = DropDown()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
+        addObserver()
+    }
+    
+    private func addObserver() {
+        viewModel.addTaskResult = {
+            self.addTaskResult?()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func setupUI() {
@@ -52,6 +64,40 @@ class AddTaskViewController: BaseViewController {
         startDateButton.setTitle("", for: .normal)
         endDateButton.setTitle("", for: .normal)
         title = "Thêm công việc"
+        addButton.tintColor = AppColor.soldierColor
+        
+        configurationDropDown()
+    }
+    
+    private func configurationDropDown() {
+        DropDown.startListeningToKeyboard()
+        DropDown.appearance().textColor = UIColor.black
+        DropDown.appearance().selectedTextColor = AppColor.soldierColor
+        if let playfairDisplayRegular = R.font.playfairDisplayRegular(size: 17) {
+            DropDown.appearance().textFont = playfairDisplayRegular
+        }
+        DropDown.appearance().backgroundColor = UIColor.white
+        DropDown.appearance().selectionBackgroundColor = AppColor.soldierColor
+        DropDown.appearance().cellHeight = 64 + 16
+        
+        dropDown.anchorView = categoryTaskTextField // UIView or UIBarButtonItem
+        dropDown.direction = .bottom
+        dropDown.bottomOffset = CGPoint(x: 0, y: categoryTaskTextField.bounds.size.height + 8)
+
+        // The list of items to display. Can be changed dynamically
+        dropDown.dataSource = ["Car", "Motorcycle", "Truck"]
+
+        /*** IMPORTANT PART FOR CUSTOM CELLS ***/
+        dropDown.cellNib = UINib(nibName: "CategoryTableViewCell", bundle: nil)
+
+        dropDown.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
+           guard let cell = cell as? CategoryTableViewCell else { return }
+            cell.optionLabel.text = item
+        }
+        
+        dropDown.selectionAction = { index, item in
+            self.categoryTaskTextField.text = item
+        }
     }
     
     private func selectStartDate() {
@@ -107,10 +153,25 @@ class AddTaskViewController: BaseViewController {
             selectEndDate()
         }
     }
+    
+    @IBAction func addNewTaskClicked(_ sender: UIButton) {
+        viewModel.setupData(title: titleTaskTextField.text, category: categoryTaskTextField.text, startDate: startDateTextField.text, endDate: deadlineTextField.text, detail: descriptionTextView.text)
+    }
 
 }
 
 extension AddTaskViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.tag == 1 {
+            dropDown.show()
+        }
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.tag == 1 {
+            
+        }
+    }
 }
 
 extension AddTaskViewController: UITextViewDelegate {
